@@ -1,0 +1,39 @@
+name: Update basketball schedule
+
+on:
+  schedule:
+    # Every day at 6:00 AM Mountain Time (13:00 UTC in winter, 12:00 in summer;
+    # we just run at 13:00 UTC year-round — exact hour doesn't matter)
+    - cron: "0 13 * * *"
+  workflow_dispatch: {}   # lets you trigger it manually from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Generate schedule.ics
+        run: python maxpreps_to_ics.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "schedule-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add schedule.ics
+          if git diff --cached --quiet; then
+            echo "No schedule changes today."
+          else
+            git commit -m "Update schedule $(date -u +%Y-%m-%d)"
+            git push
+          fi
