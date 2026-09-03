@@ -21,7 +21,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install requests
+        run: pip install requests cloudscraper
 
       - name: Generate schedule.ics
         run: python maxpreps_to_ics.py
