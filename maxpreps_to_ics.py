@@ -309,8 +309,14 @@ def build_ics(games: list) -> str:
     ]
     for g in sorted(games, key=lambda x: x["dt"]):
         prefix = "vs" if g["is_home"] else ("@" if g["is_home"] is False else "vs")
+        if g["is_home"]:
+            ha_label = " — HOME"
+        elif g["is_home"] is False:
+            ha_label = " — AWAY"
+        else:
+            ha_label = ""
         star = " (District)" if g.get("district") else ""
-        summary = f"🏀 {TEAM_NAME.split()[0]} {prefix} {g['opponent']}{star}"
+        summary = f"🏀 {TEAM_NAME.split()[0]} {prefix} {g['opponent']}{ha_label}{star}"
         if g["is_home"]:
             location = HOME_VENUE
         elif g["is_home"] is False:
