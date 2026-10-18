@@ -100,71 +100,82 @@ def fetch_html(url: str) -> str:
 
 
 # ----------------------------------------------------------------------
-# Parse strategy 1: __NEXT_DATA__ JSON (MaxPreps is a Next.js site).
-# We walk the JSON looking for contest/game objects rather than
-# hard-coding a path, so minor site refactors don't break us.
+# Parse strategy 1: schema.org JSON-LD (primary).
+# MaxPreps embeds <script type="application/ld+json"> with SportsEvent
+# entries carrying exact UTC start times, home/away teams, and venues.
 # ----------------------------------------------------------------------
 
-def parse_next_data(html: str):
-    m = re.search(
-        r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', html, re.DOTALL
-    )
-    if not m:
-        return None
+LDJSON_RE = re.compile(
+    r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>',
+    re.DOTALL | re.IGNORECASE,
+)
+
+
+def parse_ld_json(html: str):
     try:
-        data = json.loads(m.group(1))
-    except json.JSONDecodeError:
-        return None
+        from zoneinfo import ZoneInfo
+        tz = ZoneInfo(TIMEZONE)
+    except Exception:
+        tz = None
 
-    games = []
+    events = []
 
-    def walk(node):
-        if isinstance(node, dict):
-            # Heuristic: a game object has a date and an opponent-ish field
-            keys = {k.lower() for k in node.keys()}
-            has_date = keys & {"date", "contestdate", "dateutc", "contestdateutc", "datelocal"}
-            has_opp = keys & {"opponent", "opponentname", "opponentschoolname", "title"}
-            if has_date and has_opp:
-                games.append(node)
-            for v in node.values():
-                walk(v)
-        elif isinstance(node, list):
+    def scan(node):
+        if isinstance(node, list):
             for v in node:
-                walk(v)
+                scan(v)
+        elif isinstance(node, dict):
+            if node.get("@type") == "SportsEvent":
+                events.append(node)
+            for v in node.values():
+                scan(v)
 
-    walk(data)
-    if not games:
+    for m in LDJSON_RE.finditer(html):
+        try:
+            scan(json.loads(m.group(1)))
+        except json.JSONDecodeError:
+            continue
+    if not events:
         return None
 
+    our_key = TEAM_NAME.split()[0].lower()  # e.g. "eldorado"
     parsed = []
-    for g in games:
-        lower = {k.lower(): v for k, v in g.items()}
-        date_raw = (lower.get("datelocal") or lower.get("contestdate")
-                    or lower.get("date") or lower.get("dateutc")
-                    or lower.get("contestdateutc"))
-        opp = (lower.get("opponentname") or lower.get("opponentschoolname")
-               or lower.get("opponent") or "")
-        if isinstance(opp, dict):
-            opp = opp.get("name") or opp.get("schoolName") or ""
-        if not date_raw or not opp:
+    for e in events:
+        start = e.get("startDate")
+        home = (e.get("homeTeam") or {}).get("name", "")
+        away = (e.get("awayTeam") or {}).get("name", "")
+        if not start or not (home or away):
             continue
-        dt = None
-        for fmt in ("%Y-%m-%dT%H:%M:%S", "%Y-%m-%dT%H:%M:%S.%f", "%m/%d/%Y %I:%M %p"):
-            try:
-                dt = datetime.strptime(str(date_raw)[:26].rstrip("Z"), fmt)
-                break
-            except ValueError:
-                continue
-        if dt is None:
+        try:
+            dt = datetime.fromisoformat(start)
+        except ValueError:
             continue
-        home_away = str(lower.get("homeawaytype", lower.get("homeaway", ""))).lower()
-        is_home = ("home" in home_away) if home_away else None
+        if dt.tzinfo is not None and tz is not None:
+            dt = dt.astimezone(tz).replace(tzinfo=None)
+        elif dt.tzinfo is not None:
+            dt = dt.replace(tzinfo=None)
+
+        if our_key in home.lower():
+            is_home, opp = True, away
+        elif our_key in away.lower():
+            is_home, opp = False, home
+        else:
+            is_home, opp = None, away or home
+        opp = re.sub(r"\s+High School$", "", opp).strip()
+
+        loc = e.get("location") or {}
+        addr = loc.get("address") or {}
+        loc_parts = [loc.get("name", ""), addr.get("streetAddress", ""),
+                     addr.get("addressLocality", ""), addr.get("addressRegion", "")]
+        location = ", ".join(p.strip() for p in loc_parts if p and p.strip())
+
+        cid = ""
+        mu = re.search(r"c=([0-9a-f-]{36})", e.get("url") or "")
+        if mu:
+            cid = mu.group(1)
         parsed.append({
-            "dt": dt,
-            "opponent": str(opp).strip(),
-            "is_home": is_home,
-            "district": bool(lower.get("isdistrict") or lower.get("isconference")),
-            "uidsrc": str(lower.get("contestid") or lower.get("id") or ""),
+            "dt": dt, "opponent": opp, "is_home": is_home,
+            "district": False, "uidsrc": cid, "location": location,
         })
     return parsed or None
 
@@ -317,7 +328,9 @@ def build_ics(games: list) -> str:
             ha_label = ""
         star = " (District)" if g.get("district") else ""
         summary = f"🏀 {TEAM_NAME.split()[0]} {prefix} {g['opponent']}{ha_label}{star}"
-        if g["is_home"]:
+        if g.get("location"):
+            location = g["location"]
+        elif g["is_home"]:
             location = HOME_VENUE
         elif g["is_home"] is False:
             location = f"Away — at {g['opponent']}"
@@ -362,7 +375,7 @@ def build_ics(games: list) -> str:
 
 def main():
     html = fetch_html(SCHEDULE_URL)
-    games = parse_next_data(html) or parse_fallback(html)
+    games = parse_ld_json(html) or parse_fallback(html)
     if not games:
         print("ERROR: no games parsed — MaxPreps layout may have changed.", file=sys.stderr)
         sys.exit(1)
@@ -371,8 +384,15 @@ def main():
         f.write(ics)
     print(f"Wrote {OUTPUT_FILE} with {len(games)} games:")
     for g in sorted(games, key=lambda x: x["dt"]):
-        ha = "vs" if g["is_home"] else ("@ " if g["is_home"] is False else "??")
-        print(f"  {g['dt']:%a %m/%d %I:%M%p}  {ha} {g['opponent']}")
+        if g["is_home"]:
+            ha = "vs"
+            lbl = "HOME"
+        elif g["is_home"] is False:
+            ha = "@ "
+            lbl = "AWAY"
+        else:
+            ha, lbl = "??", "?"
+        print(f"  {g['dt']:%a %m/%d %I:%M%p}  {ha} {g['opponent']} [{lbl}]")
 
 
 if __name__ == "__main__":
