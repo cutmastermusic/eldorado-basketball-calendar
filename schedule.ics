@@ -24,10 +24,11 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:332345302fab8d519b8cc2db1982794c@maxpreps-to-ics
-DTSTAMP:20261018T185127Z
+DTSTAMP:20261018T192119Z
 DTSTART;TZID=America/Denver:20261124T190000
 DTEND;TZID=America/Denver:20261124T210000
-SUMMARY:🏀 Eldorado vs Manzano Albuquerque
+SUMMARY:🏀 Eldorado @ Manzano — AWAY
+LOCATION:Manzano\, 12200 Lomas Blvd NE\, Albuquerque\, NM
 DESCRIPTION:Schedule source: https://www.maxpreps.com/nm/albuquerque/eldo
  rado-golden-eagles/basketball/schedule/
 BEGIN:VALARM
@@ -38,10 +39,11 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:f05f89d8a8fbe42e8f6f5b0f247aa46c@maxpreps-to-ics
-DTSTAMP:20261018T185127Z
+DTSTAMP:20261018T192119Z
 DTSTART;TZID=America/Denver:20261204T190000
 DTEND;TZID=America/Denver:20261204T210000
-SUMMARY:🏀 Eldorado vs Las Cruces
+SUMMARY:🏀 Eldorado vs Las Cruces — HOME
+LOCATION:Eldorado\, 11300 Montgomery Blvd NE\, Albuquerque\, NM
 DESCRIPTION:Schedule source: https://www.maxpreps.com/nm/albuquerque/eldo
  rado-golden-eagles/basketball/schedule/
 BEGIN:VALARM
@@ -52,10 +54,11 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:3ca5edf947bef7cca5ea981924939f83@maxpreps-to-ics
-DTSTAMP:20261018T185127Z
-DTSTART;TZID=America/Denver:20261205T190000
-DTEND;TZID=America/Denver:20261205T210000
-SUMMARY:🏀 Eldorado vs Organ Mountain Las Cruces
+DTSTAMP:20261018T192119Z
+DTSTART;TZID=America/Denver:20261205T140000
+DTEND;TZID=America/Denver:20261205T160000
+SUMMARY:🏀 Eldorado vs Organ Mountain — HOME
+LOCATION:Eldorado\, 11300 Montgomery Blvd NE\, Albuquerque\, NM
 DESCRIPTION:Schedule source: https://www.maxpreps.com/nm/albuquerque/eldo
  rado-golden-eagles/basketball/schedule/
 BEGIN:VALARM
@@ -66,10 +69,26 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:508c0f45d173180578bc5d23d0568520@maxpreps-to-ics
-DTSTAMP:20261018T185127Z
+DTSTAMP:20261018T192119Z
 DTSTART;TZID=America/Denver:20261208T190000
 DTEND;TZID=America/Denver:20261208T210000
-SUMMARY:🏀 Eldorado vs St Pius X Albuquerque
+SUMMARY:🏀 Eldorado @ St. Pius X — AWAY
+LOCATION:St. Pius X\, 5301 St Josephs Dr NW\, Albuquerque\, NM
+DESCRIPTION:Schedule source: https://www.maxpreps.com/nm/albuquerque/eldo
+ rado-golden-eagles/basketball/schedule/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Game reminder
+TRIGGER:-PT1H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:739671edbd72aaac95982cef686d8a78@maxpreps-to-ics
+DTSTAMP:20261018T192119Z
+DTSTART;TZID=America/Denver:20261211T173000
+DTEND;TZID=America/Denver:20261211T193000
+SUMMARY:🏀 Eldorado vs El Dorado — HOME
+LOCATION:Eldorado\, 11300 Montgomery Blvd NE\, Albuquerque\, NM
 DESCRIPTION:Schedule source: https://www.maxpreps.com/nm/albuquerque/eldo
  rado-golden-eagles/basketball/schedule/
 BEGIN:VALARM
@@ -80,10 +99,11 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:716972b84ca40c03f04461df0fd4d775@maxpreps-to-ics
-DTSTAMP:20261018T185127Z
+DTSTAMP:20261018T192119Z
 DTSTART;TZID=America/Denver:20270112T190000
 DTEND;TZID=America/Denver:20270112T210000
-SUMMARY:🏀 Eldorado vs Eldorado Golden Eagles Albuquerque
+SUMMARY:🏀 Eldorado vs Albuquerque — HOME
+LOCATION:Eldorado\, 11300 Montgomery Blvd NE\, Albuquerque\, NM
 DESCRIPTION:Schedule source: https://www.maxpreps.com/nm/albuquerque/eldo
  rado-golden-eagles/basketball/schedule/
 BEGIN:VALARM
@@ -94,10 +114,11 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:d67f5b2342083baf50424048b299c631@maxpreps-to-ics
-DTSTAMP:20261018T185127Z
+DTSTAMP:20261018T192119Z
 DTSTART;TZID=America/Denver:20270119T190000
 DTEND;TZID=America/Denver:20270119T210000
-SUMMARY:🏀 Eldorado vs La Cueva Albuquerque
+SUMMARY:🏀 Eldorado @ La Cueva — AWAY
+LOCATION:La Cueva\, 7801 Wilshire Ave NE\, Albuquerque\, NM
 DESCRIPTION:Schedule source: https://www.maxpreps.com/nm/albuquerque/eldo
  rado-golden-eagles/basketball/schedule/
 BEGIN:VALARM
@@ -108,10 +129,11 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:6fa9ae16b52c4b27cdd39cce1764801f@maxpreps-to-ics
-DTSTAMP:20261018T185127Z
+DTSTAMP:20261018T192119Z
 DTSTART;TZID=America/Denver:20270121T190000
 DTEND;TZID=America/Denver:20270121T210000
-SUMMARY:🏀 Eldorado vs Eldorado Golden Eagles Albuquerque
+SUMMARY:🏀 Eldorado vs Cibola — HOME
+LOCATION:Eldorado\, 11300 Montgomery Blvd NE\, Albuquerque\, NM
 DESCRIPTION:Schedule source: https://www.maxpreps.com/nm/albuquerque/eldo
  rado-golden-eagles/basketball/schedule/
 BEGIN:VALARM
@@ -122,10 +144,11 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:77535b9d835ec401ca8b04bd14003828@maxpreps-to-ics
-DTSTAMP:20261018T185127Z
+DTSTAMP:20261018T192119Z
 DTSTART;TZID=America/Denver:20270126T190000
 DTEND;TZID=America/Denver:20270126T210000
-SUMMARY:🏀 Eldorado vs Eldorado Golden Eagles Albuquerque
+SUMMARY:🏀 Eldorado @ Capital — AWAY
+LOCATION:Capital\, 4851 Paseo Del Sol Dr\, Santa Fe\, NM
 DESCRIPTION:Schedule source: https://www.maxpreps.com/nm/albuquerque/eldo
  rado-golden-eagles/basketball/schedule/
 BEGIN:VALARM
@@ -136,10 +159,11 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ebc1f65ff25029f13b8737a610cd203d@maxpreps-to-ics
-DTSTAMP:20261018T185127Z
+DTSTAMP:20261018T192119Z
 DTSTART;TZID=America/Denver:20270128T190000
 DTEND;TZID=America/Denver:20270128T210000
-SUMMARY:🏀 Eldorado vs Santa Fe
+SUMMARY:🏀 Eldorado vs Santa Fe — HOME
+LOCATION:Eldorado\, 11300 Montgomery Blvd NE\, Albuquerque\, NM
 DESCRIPTION:Schedule source: https://www.maxpreps.com/nm/albuquerque/eldo
  rado-golden-eagles/basketball/schedule/
 BEGIN:VALARM
@@ -150,10 +174,11 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ca0dabd2678d89b4ac115e4c637783a5@maxpreps-to-ics
-DTSTAMP:20261018T185127Z
+DTSTAMP:20261018T192119Z
 DTSTART;TZID=America/Denver:20270129T190000
 DTEND;TZID=America/Denver:20270129T210000
-SUMMARY:🏀 Eldorado vs Santa Fe
+SUMMARY:🏀 Eldorado @ Santa Fe — AWAY
+LOCATION:Santa Fe\, 2100 Yucca Rd\, Santa Fe\, NM
 DESCRIPTION:Schedule source: https://www.maxpreps.com/nm/albuquerque/eldo
  rado-golden-eagles/basketball/schedule/
 BEGIN:VALARM
@@ -164,10 +189,11 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:00d6ba6be5092b079ea850fd7817490c@maxpreps-to-ics
-DTSTAMP:20261018T185127Z
-DTSTART;TZID=America/Denver:20270130T190000
-DTEND;TZID=America/Denver:20270130T210000
-SUMMARY:🏀 Eldorado vs Eldorado Golden Eagles Albuquerque
+DTSTAMP:20261018T192119Z
+DTSTART;TZID=America/Denver:20270130T140000
+DTEND;TZID=America/Denver:20270130T160000
+SUMMARY:🏀 Eldorado vs Atrisco Heritage Academy — HOME
+LOCATION:Eldorado\, 11300 Montgomery Blvd NE\, Albuquerque\, NM
 DESCRIPTION:Schedule source: https://www.maxpreps.com/nm/albuquerque/eldo
  rado-golden-eagles/basketball/schedule/
 BEGIN:VALARM
@@ -178,10 +204,11 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:191a91b44a637e86c33c08c8d6986cef@maxpreps-to-ics
-DTSTAMP:20261018T185127Z
+DTSTAMP:20261018T192119Z
 DTSTART;TZID=America/Denver:20270202T190000
 DTEND;TZID=America/Denver:20270202T210000
-SUMMARY:🏀 Eldorado vs Sandia Albuquerque
+SUMMARY:🏀 Eldorado vs Sandia — HOME
+LOCATION:Eldorado\, 11300 Montgomery Blvd NE\, Albuquerque\, NM
 DESCRIPTION:Schedule source: https://www.maxpreps.com/nm/albuquerque/eldo
  rado-golden-eagles/basketball/schedule/
 BEGIN:VALARM
@@ -192,10 +219,11 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:2763e2f66ebf7b194b398d2784545722@maxpreps-to-ics
-DTSTAMP:20261018T185127Z
+DTSTAMP:20261018T192119Z
 DTSTART;TZID=America/Denver:20270204T190000
 DTEND;TZID=America/Denver:20270204T210000
-SUMMARY:🏀 Eldorado vs La Cueva Albuquerque
+SUMMARY:🏀 Eldorado vs La Cueva — HOME
+LOCATION:Eldorado\, 11300 Montgomery Blvd NE\, Albuquerque\, NM
 DESCRIPTION:Schedule source: https://www.maxpreps.com/nm/albuquerque/eldo
  rado-golden-eagles/basketball/schedule/
 BEGIN:VALARM
@@ -206,10 +234,11 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:198d1589b25771ea2444a4aa2981c061@maxpreps-to-ics
-DTSTAMP:20261018T185127Z
+DTSTAMP:20261018T192119Z
 DTSTART;TZID=America/Denver:20270212T190000
 DTEND;TZID=America/Denver:20270212T210000
-SUMMARY:🏀 Eldorado vs Eldorado Golden Eagles Albuquerque
+SUMMARY:🏀 Eldorado vs Capital — HOME
+LOCATION:Eldorado\, 11300 Montgomery Blvd NE\, Albuquerque\, NM
 DESCRIPTION:Schedule source: https://www.maxpreps.com/nm/albuquerque/eldo
  rado-golden-eagles/basketball/schedule/
 BEGIN:VALARM
@@ -220,10 +249,11 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:898baf8798de44a3c91e09daa169d2cc@maxpreps-to-ics
-DTSTAMP:20261018T185127Z
+DTSTAMP:20261018T192119Z
 DTSTART;TZID=America/Denver:20270217T190000
 DTEND;TZID=America/Denver:20270217T210000
-SUMMARY:🏀 Eldorado vs Santa Fe
+SUMMARY:🏀 Eldorado @ Santa Fe — AWAY
+LOCATION:Santa Fe\, 2100 Yucca Rd\, Santa Fe\, NM
 DESCRIPTION:Schedule source: https://www.maxpreps.com/nm/albuquerque/eldo
  rado-golden-eagles/basketball/schedule/
 BEGIN:VALARM
@@ -234,10 +264,11 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:fdab82bfb2029a86ba5c5bd869ec3db9@maxpreps-to-ics
-DTSTAMP:20261018T185127Z
+DTSTAMP:20261018T192119Z
 DTSTART;TZID=America/Denver:20270219T190000
 DTEND;TZID=America/Denver:20270219T210000
-SUMMARY:🏀 Eldorado vs Sandia Albuquerque
+SUMMARY:🏀 Eldorado @ Sandia — AWAY
+LOCATION:Sandia\, 7801 Candelaria Rd NE\, Albuquerque\, NM
 DESCRIPTION:Schedule source: https://www.maxpreps.com/nm/albuquerque/eldo
  rado-golden-eagles/basketball/schedule/
 BEGIN:VALARM
