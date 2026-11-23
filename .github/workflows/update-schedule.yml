@@ -23,14 +23,34 @@ jobs:
       - name: Install dependencies
         run: pip install requests cloudscraper
 
-      - name: Generate schedule.ics
+      # Varsity keeps the original schedule.ics name so existing subscribers keep working
+      - name: Generate varsity schedule.ics
+        run: python maxpreps_to_ics.py
+
+      - name: Generate JV schedule-jv.ics
+        if: always()
+        env:
+          MAXPREPS_URL: https://www.maxpreps.com/nm/albuquerque/eldorado-golden-eagles/basketball/jv/schedule/
+          CALENDAR_NAME: Eldorado JV Basketball
+          TEAM_LABEL: Eldorado JV
+          OUTPUT_FILE: schedule-jv.ics
+        run: python maxpreps_to_ics.py
+
+      - name: Generate freshman schedule-freshman.ics
+        if: always()
+        env:
+          MAXPREPS_URL: https://www.maxpreps.com/nm/albuquerque/eldorado-golden-eagles/basketball/freshman/schedule/
+          CALENDAR_NAME: Eldorado Freshman Basketball
+          TEAM_LABEL: Eldorado Freshman
+          OUTPUT_FILE: schedule-freshman.ics
         run: python maxpreps_to_ics.py
 
       - name: Commit if changed
+        if: always()
         run: |
           git config user.name "schedule-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add schedule.ics
+          git add schedule*.ics
           if git diff --cached --quiet; then
             echo "No schedule changes today."
           else
