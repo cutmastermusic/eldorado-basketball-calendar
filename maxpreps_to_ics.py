@@ -34,6 +34,9 @@ HOME_VENUE = os.environ.get(
 )
 GAME_DURATION_HOURS = 2
 OUTPUT_FILE = os.environ.get("OUTPUT_FILE", "schedule.ics")
+# Shown at the start of every event title, e.g. "Eldorado JV". Defaults to the
+# first word of TEAM_NAME so the varsity feed's titles stay as they were.
+TEAM_LABEL = os.environ.get("TEAM_LABEL", TEAM_NAME.split()[0])
 
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
      "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
@@ -327,7 +330,7 @@ def build_ics(games: list) -> str:
         else:
             ha_label = ""
         star = " (District)" if g.get("district") else ""
-        summary = f"🏀 {TEAM_NAME.split()[0]} {prefix} {g['opponent']}{ha_label}{star}"
+        summary = f"🏀 {TEAM_LABEL} {prefix} {g['opponent']}{ha_label}{star}"
         if g.get("location"):
             location = g["location"]
         elif g["is_home"]:
